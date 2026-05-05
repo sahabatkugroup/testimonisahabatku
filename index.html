@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sahabatku Group | Experience Review</title>
+  <title>Sahabatku Group | Testimoni</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -277,19 +277,22 @@
       const looped = [...reviews, ...reviews, ...reviews]; 
   
       looped.forEach(item => {
-          const card = document.createElement('div');
-          card.className = 'testi-item';
-          card.innerHTML = `
-              <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                  <span style="font-weight:800; color:var(--primary);">${item.fullname}</span>
-                  <span style="color:var(--gold);">${'★'.repeat(item.rating)}</span>
-              </div>
-              <p style="font-size:0.9rem; color:var(--text); line-height:1.5; font-style:italic;">"${item.comments}"</p>
-              <div style="margin-top:15px; padding-top:10px; border-top:1px solid #f1f5f9; font-size:0.75rem; color:var(--text-soft);">
-                  📦 ${item.speed} • 🛵 ${item.courierName}
-              </div>
-          `;
-          track.appendChild(card);
+        const card = document.createElement('div');
+        card.className = 'testi-item';
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <span style="font-weight:800; color:var(--primary);">${item.fullname}</span>
+            <span style="color:var(--gold);">${'★'.repeat(item.rating)}</span>
+          </div>
+          <p style="font-size:0.9rem; color:var(--text); line-height:1.5; font-style:italic;">"${item.comments}"</p>
+          
+          <!-- Bagian bawah yang diubah: Memunculkan Speed dan Attitude -->
+          <div style="margin-top:15px; padding-top:10px; border-top:1px solid #f1f5f9; font-size:0.75rem; color:var(--text-soft); display: flex; gap: 10px;">
+            <span>📦 Kecepatan: <strong>${item.speed || '-'}</strong></span>
+            <span>🤝 Sikap: <strong>${item.attitude || '-'}</strong></span>
+          </div>
+        `;
+        track.appendChild(card);
       });
   });
 </script>
