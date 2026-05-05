@@ -2,627 +2,213 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Testimoni Sahabatku Delivery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahabatku Group | Experience Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
-    /* Menggunakan font Inter untuk kesan modern dan profesional */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
     :root {
-      /* Palette baru dengan #00CAFF sebagai Primary Color */
-      --primary: #00CAFF; /* Biru Muda / Cyan */
-      --primary-light: #33D9FF;
-      --primary-dark: #009AC7; /* Versi lebih gelap untuk teks dan hover */
-      
-      /* Warna Netral */
-      --background: #f9fbfc; /* Sangat soft gray */
-      --white: #ffffff;
-      --gray-light: #e6e9ed; /* Border/background input */
-      --gray-medium: #a3a9b8; /* Text sekunder */
-      --gray-dark: #3a3f55; /* Text utama (deep gray) */
-      
-      /* Aksen dan Efek */
-      --error: #ef4444;
-      --success: #10b981;
-      --rating-color: #FFC107; /* Amber/Gold for rating */
-      --shadow-soft: rgba(0, 202, 255, 0.15);
-      --shadow-medium: rgba(0, 202, 255, 0.3);
-      --font-family: 'Inter', sans-serif;
+      --primary: #0080f7;
+      --primary-grad: linear-gradient(135deg, #0080f7 0%, #00c6ff 100%);
+      --bg: #f8fbff;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-soft: #64748b;
+      --gold: #facc15;
+      --radius-lg: 24px;
+      --card-width: 320px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      background: var(--background);
-      font-family: var(--font-family);
-      color: var(--gray-dark);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #e3f2fd 100%);
+      color: var(--text);
       min-height: 100vh;
-      padding: 3rem 1.5rem;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      padding-bottom: 50px;
     }
 
-    .wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 640px; /* Lebar maksimum untuk konten */
+    /* Floating Navigation */
+    .floating-nav {
+      position: fixed; top: 20px; right: 20px; z-index: 999;
+      display: flex; align-items: center; gap: 10px;
+      background: white; padding: 8px 18px; border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-decoration: none; transition: 0.3s;
     }
 
-    .container, .testimonials-list-section {
-      background: var(--white);
-      width: 100%;
-      border-radius: 16px;
-      /* Box shadow menggunakan warna tema */
-      box-shadow: 0 4px 12px var(--shadow-soft), 0 10px 30px var(--shadow-soft);
-      padding: 2.5rem 3rem;
-      margin-bottom: 2rem;
-      animation: slideFadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-      transition: all 0.3s ease;
-      border: 1px solid var(--gray-light);
-    }
+    /* Main Container */
+    .wrapper { max-width: 500px; margin: 80px auto 0; padding: 0 20px; }
     
-    .testimonials-list-section {
-        margin-top: 0;
+    .card {
+      background: var(--card-bg); border-radius: var(--radius-lg);
+      padding: 40px 30px; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
     }
 
-    h1 {
-      font-weight: 800;
-      font-size: 2.25rem;
-      color: var(--primary-dark);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.5px;
-      text-align: center;
-      user-select: none;
-      /* Gradien pada teks menggunakan warna tema */
-      background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .title { text-align: center; font-size: 1.8rem; font-weight: 800; background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+    .subtitle { text-align: center; color: var(--text-soft); font-size: 0.9rem; margin-bottom: 35px; }
+
+    /* Form Styling */
+    .input-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 700; font-size: 0.85rem; color: var(--text-soft); margin-bottom: 8px; }
+    input[type="text"], textarea {
+      width: 100%; padding: 15px; border: 2px solid #f1f5f9;
+      border-radius: 12px; background: #f8fafc; font-family: inherit; transition: 0.3s;
     }
+    input:focus, textarea:focus { border-color: var(--primary); outline: none; background: white; }
+
+    /* Rating Stars */
+    .rating-flex { display: flex; flex-direction: row-reverse; justify-content: center; gap: 5px; margin: 10px 0; }
+    .rating-flex input { display: none; }
+    .rating-flex label { font-size: 2.5rem; color: #e2e8f0; cursor: pointer; transition: 0.2s; margin: 0; }
+    .rating-flex label:hover, .rating-flex label:hover ~ label, .rating-flex input:checked ~ label { color: var(--gold); }
+
+    /* Radio Selection */
+    .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px; }
+    .choice-grid input { display: none; }
+    .choice-grid label {
+      padding: 12px; background: #f1f5f9; border-radius: 10px; text-align: center;
+      cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: 0.3s;
+    }
+    .choice-grid input:checked + label { background: var(--primary); color: white; }
+
+    .btn-submit {
+      width: 100%; padding: 18px; border-radius: 12px; border: none;
+      background: var(--primary-grad); color: white; font-weight: 800;
+      cursor: pointer; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,128,247,0.2);
+    }
+
+    /* Testimonials Slider */
+    .testimonials-section { overflow: hidden; padding: 20px 0; }
+    .carousel-track { display: flex; gap: 20px; width: max-content; animation: scroll 80s linear infinite; }
+    .carousel-track:hover { animation-play-state: paused; }
     
-    .subtitle {
-        text-align: center;
-        color: var(--gray-medium);
-        font-size: 1rem;
-        font-weight: 400;
-        margin-bottom: 2.5rem;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
+    .testi-item {
+      background: white; width: var(--card-width); padding: 25px;
+      border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid #f1f5f9; flex-shrink: 0;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    
-    .form-group {
-        position: relative;
-    }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    label, legend {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--gray-dark);
-      user-select: none;
-      border: none;
-      padding: 0;
-      margin: 0 0 0.5rem 0;
-      display: block;
-      transition: color 0.3s ease;
+    /* Modals */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px); z-index: 10000;
+      display: flex; justify-content: center; align-items: center; padding: 20px;
     }
-    
-    /* Floating Label Style */
-    .form-group.is-filled > label {
-        color: var(--primary);
-        font-weight: 600;
-    }
-
-    fieldset {
-        border: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    input[type="text"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 0.9rem 1.25rem;
-      font-size: 1rem;
-      font-weight: 500;
-      border-radius: 8px;
-      border: 1px solid var(--gray-light);
-      background: var(--white);
-      color: var(--gray-dark);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      font-family: var(--font-family);
-      resize: vertical;
-      min-height: 2.8rem;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
-    }
-
-    input[type="text"]:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: var(--primary);
-      /* Efek fokus menggunakan warna tema */
-      box-shadow: 0 0 0 3px rgba(0, 202, 255, 0.3);
-      background: var(--white);
-    }
-
-    textarea {
-      min-height: 130px;
-      line-height: 1.5;
-    }
-
-    /* Rating Stars - Clean Unicode look */
-    .rating-stars {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-start;
-      gap: 0.2rem;
-      user-select: none;
-      font-size: 2.5rem;
-      position: relative;
-    }
-
-    .rating-stars input[type="radio"] {
-      display: none;
-    }
-
-    .rating-stars label {
-      font-size: 2.5rem;
-      color: var(--gray-light);
-      cursor: pointer;
-      transition: color 0.3s ease, transform 0.2s ease;
-      margin: 0;
-      padding: 0 0.3rem;
-    }
-    
-    .rating-stars label::before {
-        content: '★';
-        font-weight: 400;
-    }
-    
-    /* Hover state */
-    .rating-stars label:hover,
-    .rating-stars label:hover ~ label {
-      color: var(--rating-color);
-      transform: scale(1.1);
-    }
-
-    /* Checked state */
-    .rating-stars input[type="radio"]:checked ~ label {
-      color: var(--rating-color);
-      transform: scale(1.1);
-      text-shadow: 0 0 8px rgba(255, 193, 7, 0.4);
-    }
-
-    /* Radio groups - Button Toggle Style (menggunakan warna tema) */
-    .radio-group {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .radio-group input[type="radio"] {
-      display: none;
-    }
-
-    .radio-group label {
-      flex: 1 1 30%;
-      background: var(--gray-light);
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--gray-medium);
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-      user-select: none;
-      border: 1px solid var(--gray-light);
-      margin: 0;
-    }
-    
-    .radio-group-courier label {
-        flex: 1 1 48%;
-    }
-
-    .radio-group label:hover {
-      background: #e9f8ff; /* Soft hover using primary color */
-      color: var(--gray-dark);
-    }
-
-    .radio-group input[type="radio"]:checked + label {
-      background: var(--primary);
-      color: var(--white);
-      /* Shadow menggunakan warna tema */
-      box-shadow: 0 4px 10px var(--shadow-medium);
-      border-color: var(--primary-dark);
-    }
-
-    /* Error messages */
-    .error-message {
-      color: var(--error);
-      font-size: 0.85rem;
-      margin-top: 0.5rem;
-      font-weight: 500;
-      min-height: 1.2rem;
-    }
-
-    /* Submit button - Menggunakan warna tema dan shadow yang kuat */
-    button[type="submit"] {
-      background: var(--primary);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 1.1rem;
-      padding: 1rem 0;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      /* Shadow menggunakan warna tema */
-      box-shadow: 0 4px 12px var(--shadow-medium);
-      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-top: 1rem;
-    }
-
-    button[type="submit"]:hover,
-    button[type="submit"]:focus {
-      background: var(--primary-dark);
-      /* Shadow yang lebih kuat saat hover */
-      box-shadow: 0 8px 20px var(--shadow-medium);
-      transform: translateY(-2px);
-      outline: none;
-    }
-
-    /* Modal - Clean and Centered */
-    .modal-bg {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      animation: fadeIn 0.4s ease forwards;
-      padding: 1rem;
-    }
-
-    .modal {
-      background: var(--white);
-      border-radius: 12px;
-      max-width: 400px;
-      width: 100%;
-      padding: 2.5rem;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    
-    .modal .modal-icon {
-        font-size: 3rem;
-        color: var(--primary); /* Menggunakan warna tema */
-        margin-bottom: 0.75rem;
-    }
-
-    .modal h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--gray-dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .modal p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: var(--gray-medium);
-      margin-bottom: 2rem;
-      user-select: text;
-    }
-
-    .modal button {
-      background: var(--primary); /* Menggunakan warna tema */
-      color: var(--white);
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.75rem 2rem;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 10px var(--shadow-medium);
-      transition: all 0.3s ease;
-      user-select: none;
-    }
-
-    .modal button:hover {
-      background: var(--primary-dark);
-      box-shadow: 0 6px 15px var(--shadow-medium);
-      transform: translateY(-1px);
-    }
-
-    /* --- Bagian Testimoni - Card-based Clean Look --- */
-
-    .testimonials-list-section h2 {
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: var(--primary-dark);
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-    
-    .testimonials-list-section .subtitle {
-        margin-bottom: 2rem;
-    }
-
-    .testimonials-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      overflow-y: auto;
-      max-height: 500px;
-      padding-right: 10px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary) var(--gray-light);
-    }
-
-    .testimonial-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.5rem;
-      position: relative;
-      border: 1px solid var(--gray-light);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: box-shadow 0.3s ease;
-    }
-
-    .testimonial-card:hover {
-      box-shadow: 0 4px 15px var(--shadow-soft);
-    }
-
-    .testimonial-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .testimonial-card-header .name {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: var(--primary-dark);
-    }
-    
-    .testimonial-card-header .rating-display {
-        font-size: 0.95rem;
-        color: var(--rating-color);
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-    }
-    
-    .rating-icon {
-        display: inline-block;
-        color: var(--rating-color);
-        font-size: 1.1em;
-        margin-right: 0.1em;
-    }
-    
-    .rating-icon::before {
-        content: '★';
-    }
-
-
-    .testimonial-card p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--gray-dark);
-      margin-bottom: 0;
-      padding-bottom: 1rem;
-      border-bottom: 1px dashed var(--gray-light);
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-style: italic;
-    }
-
-    .testimonial-card .meta {
-      font-size: 0.75rem;
-      color: var(--gray-medium);
-      margin-top: 1rem;
-      font-style: normal;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .testimonial-card .meta span:first-child {
-        font-weight: 500;
-        color: var(--gray-medium);
-    }
-    
-    .testimonial-card .meta span:last-child {
-        color: var(--primary-dark);
-        font-weight: 600;
-    }
-
-    /* Animations */
-    @keyframes slideFadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.95); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Responsive */
-    @media (max-width: 650px) {
-      .container, .testimonials-list-section {
-        padding: 2rem 1.5rem;
-      }
-      h1 {
-        font-size: 1.8rem;
-      }
-      .subtitle {
-          font-size: 0.9rem;
-      }
-      .radio-group label {
-        flex: 1 1 100%;
-        font-size: 0.85rem;
-      }
-      .radio-group-courier label {
-          flex: 1 1 47%;
-      }
-      .rating-stars label {
-          font-size: 2rem;
-      }
-      .modal {
-          padding: 1.5rem;
-      }
-      .testimonial-card-header {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.5rem;
-      }
-      .testimonial-card-header .rating-display {
-          margin-top: 0.2rem;
-      }
-      .testimonial-card .meta {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.5rem;
-      }
-    }
+    .modal-card { background: white; padding: 40px; border-radius: 30px; text-align: center; max-width: 400px; }
   </style>
 </head>
 <body>
-<div class="wrapper">
-  <main class="container" role="main" aria-label="Formulir Testimoni Sahabatku Delivery">
-    <h1>Testimoni Pelayanan</h1>
-    <p class="subtitle">Kami berkomitmen untuk memberikan layanan terbaik. Berikan masukan Anda untuk membantu kami menjadi lebih baik!</p>
+
+<!-- Ganti link href dengan URL website Anda -->
+<a href="https://sahabatkugroup.github.io/websitesahabatkudelivery/" class="floating-nav">
+  <div style="width:32px; height:32px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#fff; border: 1px solid #f1f5f9;">
+    <!-- Tambahkan URL gambar logo Anda di src -->
+    <img src="https://i.ibb.co.com/Lhg1Z2GW/Sahabatku-2.png/logo.png" alt="Logo" style="width:100%; height:100%; object-fit:cover;">
+  </div>
+  <span style="font-weight:700; color:var(--primary); font-size:0.75rem;">KUNJUNGU WEB KAMI</span>
+</a>
+
+<div class="modal-overlay" id="welcomePop">
+  <div class="modal-card">
+    <!-- Kontainer Gambar -->
+    <div style="background:var(--primary-grad); width:70px; height:70px; border-radius:20px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:white; overflow:hidden;">
+      <!-- GANTI URL DI BAWAH DENGAN LINK LOGO ANDA -->
+      <img src="https://i.ibb.co.com/Lhg1Z2GW/Sahabatku-2.png/logo.png" alt="Sahabatku Logo" style="width:100%; height:100%; object-fit:cover;">
+    </div>
     
-    <form id="testimonialForm" novalidate>
-      <div class="form-group">
-        <label for="fullname">Nama Lengkap<span aria-hidden="true" style="color:var(--error);">*</span></label>
-        <input type="text" id="fullname" name="fullname" placeholder="Contoh: Budi Santoso" required aria-required="true" autocomplete="name" />
-        <div class="error-message" id="error-fullname" aria-live="polite"></div>
-      </div>
-
-      <fieldset>
-        <legend id="ratingLabel">Seberapa puas Anda dengan pelayanan kami? <span aria-hidden="true" style="color:var(--error);">*</span></legend>
-        <div class="rating-stars" role="radiogroup" aria-required="true" aria-labelledby="ratingLabel" tabindex="0">
-          <input type="radio" id="star5" name="rating" value="5" />
-          <label for="star5" title="5 bintang" aria-label="5 bintang"></label>
-
-          <input type="radio" id="star4" name="rating" value="4" />
-          <label for="star4" title="4 bintang" aria-label="4 bintang"></label>
-
-          <input type="radio" id="star3" name="rating" value="3" />
-          <label for="star3" title="3 bintang" aria-label="3 bintang"></label>
-
-          <input type="radio" id="star2" name="rating" value="2" />
-          <label for="star2" title="2 bintang" aria-label="2 bintang"></label>
-
-          <input type="radio" id="star1" name="rating" value="1" />
-          <label for="star1" title="1 bintang" aria-label="1 bintang"></label>
-        </div>
-        <div class="error-message" id="error-rating" aria-live="polite"></div>
-      </fieldset>
-
-      <fieldset>
-        <legend id="courierLabel">Apakah kurir Sahabatku kami ramah dan sopan? <span aria-hidden="true" style="color:var(--error);">*</span></legend>
-        <div class="radio-group radio-group-courier" role="radiogroup" aria-required="true" aria-labelledby="courierLabel">
-          <input type="radio" id="courier-yes" name="courier" value="Ramah dan Sopan" />
-          <label for="courier-yes">Ramah dan Sopan</label>
-
-          <input type="radio" id="courier-no" name="courier" value="Kurang Ramah/Sopan" />
-          <label for="courier-no">Kurang Ramah/Sopan</label>
-        </div>
-        <div class="error-message" id="error-courier" aria-live="polite"></div>
-      </fieldset>
-
-      <fieldset>
-        <legend id="speedLabel">Kecepatan layanan Sahabatku Delivery hari ini? <span aria-hidden="true" style="color:var(--error);">*</span></legend>
-        <div class="radio-group" role="radiogroup" aria-required="true" aria-labelledby="speedLabel">
-          <input type="radio" id="speed-fast" name="speed" value="Cepat" />
-          <label for="speed-fast">Cepat</label>
-
-          <input type="radio" id="speed-avg" name="speed" value="Sedang" />
-          <label for="speed-avg">Sedang</label>
-
-          <input type="radio" id="speed-slow" name="speed" value="Lambat" />
-          <label for="speed-slow">Lambat</label>
-        </div>
-        <div class="error-message" id="error-speed" aria-live="polite"></div>
-      </fieldset>
-
-      <div class="form-group">
-        <label for="comments">Pesan & Komentar (kritik & saran)<span aria-hidden="true" style="color:var(--error);">*</span></label>
-        <textarea id="comments" name="comments" placeholder="Sampaikan kritik atau saran Anda, kami sangat menghargai masukan yang konstruktif." required aria-required="true" aria-describedby="commentsHelp"></textarea>
-        <div class="error-message" id="error-comments" aria-live="polite"></div>
-      </div>
-
-      <button type="submit" aria-label="Kirim testimoni">KIRIM PENILAIAN</button>
-    </form>
-  </main>
-  
-  <section class="testimonials-list-section" role="region" aria-labelledby="testimonialsHeading">
-    <h2 id="testimonialsHeading">Testimoni Terbaru</h2>
-    <p class="subtitle">Lihat apa yang dikatakan pelanggan kami yang telah disetujui untuk ditampilkan.</p>
-    <div id="testimonials-container" class="testimonials-container">
-      </div>
-  </section>
+    <h2>Halo Sahabat!</h2>
+    <p style="margin:15px 0 25px; color:var(--text-soft);">Terimakasih sudah memilih layanan kami. Penilaian Anda sangat berarti bagi perkembangan kami!</p>
+    <button class="btn-submit" onclick="closePop()">MULAI REVIEW</button>
+  </div>
 </div>
 
-  <div class="modal-bg" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc" tabindex="-1">
-    <div class="modal">
-      <div class="modal-icon">👋</div>
-      <h2 id="welcomeTitle">Halo Sahabat!</h2>
-      <p id="welcomeDesc">
-        Terimakasih sudah menyempatkan waktu untuk menilai layanan kami. Penilaian Anda membantu kami terus berkembang.
-      </p>
-      <button id="closeWelcomeBtn" aria-label="Tutup pesan sambutan">Mulai Penilaian</button>
-    </div>
-  </div>
-  
-  <div class="modal-bg" id="thankYouModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" tabindex="-1">
-    <div class="modal">
-      <div class="modal-icon">✅</div>
-      <h2 id="modalTitle">Penilaian Terkirim!</h2>
-      <p id="modalDesc">
-        Kami telah menerima testimoni Anda. Terimakasih atas kepercayaan Anda! Masukan Anda akan kami proses dan segera ditampilkan.
-      </p>
-      <button id="closeModalBtn" aria-label="Tutup pesan terimakasih">Selesai</button>
-    </div>
+<div class="wrapper">
+  <div class="card">
+    <h1 class="title">Feedback Pelanggan</h1>
+    <p class="subtitle">Pengalaman Anda adalah kualitas layanan kami</p>
+    
+    <form id="feedbackForm">
+      <div class="input-group">
+        <label>👤 Nama Lengkap</label>
+        <input type="text" id="fullname" placeholder="Contoh: Agus Maryono" required>
+      </div>
+
+      <div class="input-group">
+        <label>🛵 Nama Kurir (Opsional)</label>
+        <input type="text" id="courier" placeholder="Nama Kurir yang mengantar...">
+      </div>
+
+      <div class="input-group">
+        <label style="text-align:center;">⭐ Berikan Rating Layanan</label>
+        <div class="rating-flex">
+          <input type="radio" id="s5" name="rating" value="5" required><label for="s5">★</label>
+          <input type="radio" id="s4" name="rating" value="4"><label for="s4">★</label>
+          <input type="radio" id="s3" name="rating" value="3"><label for="s3">★</label>
+          <input type="radio" id="s2" name="rating" value="2"><label for="s2">★</label>
+          <input type="radio" id="s1" name="rating" value="1"><label for="s1">★</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>🛵 Sikap Kurir</label>
+        <div class="choice-grid">
+          <input type="radio" id="c-yes" name="attitude" value="Sangat Ramah" required>
+          <label for="c-yes">😊 Ramah</label>
+          <input type="radio" id="c-no" name="attitude" value="Kurang Ramah">
+          <label for="c-no">😕 Kurang</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>⚡ Kecepatan Kirim</label>
+        <div class="choice-grid">
+          <input type="radio" id="f-fast" name="speed" value="Sangat Cepat" required>
+          <label for="f-fast">🚀 Cepat</label>
+          <input type="radio" id="f-slow" name="speed" value="Standar">
+          <label for="f-slow">⏱️ Standar</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>💬 Pesan & Kesan</label>
+        <textarea id="comments" rows="3" placeholder="Sampaikan kritik atau saran anda..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">KIRIM TESTIMONI ✨</button>
+    </form>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <h3 style="text-align:center; margin-bottom:20px;">Review Terbaru Sahabat</h3>
+  <div class="testimonials-section">
+    <div class="carousel-track" id="testiTrack">
+      <!-- Data dari Firebase masuk ke sini -->
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal" style="display:none;">
+  <div class="modal-card">
+    <div style="background:#10b981; width:70px; height:70px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:white;">
+      <i data-lucide="check" size="35"></i>
+    </div>
+    <h2>Terima Kasih! 🎉</h2>
+    <p style="margin:15px 0 25px; color:var(--text-soft);">Review Anda sangat berarti bagi kami. Semoga sehat selalu!</p>
+    <button class="btn-submit" onclick="location.reload()" style="background:#10b981;">TUTUP</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
 <script>
-  // Firebase config (DIPERTahankan)
+  lucide.createIcons();
+
   const firebaseConfig = {
     apiKey: "AIzaSyCtva8TeL40-WotK4kFL_vL8uUXL3GDfww",
     authDomain: "sahabatkuu-bisa.firebaseapp.com",
@@ -630,226 +216,63 @@
     projectId: "sahabatkuu-bisa",
     storageBucket: "sahabatkuu-bisa.firebasestorage.app",
     messagingSenderId: "315555564115",
-    appId: "1:315555564115:web:56f46dbceb8c154589d4a6",
-    measurementId: "G-PFGYL96VPS"
+    appId: "1:315555564115:web:56f46dbceb8c154589d4a6"
   };
 
-  // Init Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  const form = document.getElementById('testimonialForm');
-  const thankYouModal = document.getElementById('thankYouModal');
-  const closeModalBtn = document.getElementById('closeModalBtn');
+  function closePop() { document.getElementById('welcomePop').style.display = 'none'; }
 
-  // Error elements
-  const errors = {
-    fullname: document.getElementById('error-fullname'),
-    rating: document.getElementById('error-rating'),
-    courier: document.getElementById('error-courier'),
-    speed: document.getElementById('error-speed'),
-    comments: document.getElementById('error-comments'),
-  };
-
-  // Input elements for floating label effect
-  const inputs = document.querySelectorAll('input[type="text"], textarea');
-
-  // Add listener for pseudo-floating label effect
-  inputs.forEach(input => {
-    // Check initial state
-    if (input.value.trim() !== '') {
-        input.closest('.form-group')?.classList.add('is-filled');
-    }
-
-    input.addEventListener('focus', () => {
-        input.closest('.form-group')?.classList.add('is-filled');
-    });
-
-    input.addEventListener('blur', () => {
-        if (input.value.trim() === '') {
-            input.closest('.form-group')?.classList.remove('is-filled');
-        }
-    });
-    
-    // Also track input for instant feedback
-    input.addEventListener('input', () => {
-        if (input.value.trim() !== '') {
-            input.closest('.form-group')?.classList.add('is-filled');
-        } else {
-            input.closest('.form-group')?.classList.remove('is-filled');
-        }
-    });
-  });
-
-
-  function clearErrors() {
-    Object.values(errors).forEach(el => el.textContent = '');
-  }
-  
-  // Fungsi untuk mendapatkan nilai radio yang dipilih dari fieldset/group
-  function getRadioValue(name) {
-      const radios = document.getElementsByName(name);
-      for (let i = 0; i < radios.length; i++) {
-          if (radios[i].checked) {
-              return radios[i].value;
-          }
-      }
-      return '';
-  }
-
-  function validateForm(data) {
-    clearErrors();
-    let valid = true;
-
-    if (!data.fullname.trim()) {
-      errors.fullname.textContent = 'Nama lengkap wajib diisi.';
-      valid = false;
-    }
-    if (!getRadioValue('rating')) {
-      errors.rating.textContent = 'Mohon pilih rating bintang.';
-      valid = false;
-    }
-    if (!getRadioValue('courier')) {
-      errors.courier.textContent = 'Mohon pilih opsi kurir.';
-      valid = false;
-    }
-    if (!getRadioValue('speed')) {
-      errors.speed.textContent = 'Mohon pilih kecepatan layanan.';
-      valid = false;
-    }
-    if (!data.comments.trim()) {
-      errors.comments.textContent = 'Pesan & komentar wajib diisi.';
-      valid = false;
-    }
-
-    return valid;
-  }
-
-  // Handle submit
-  form.addEventListener('submit', (e) => {
+  // Simpan ke Firebase
+  document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const data = {
-      fullname: form.fullname.value,
-      rating: getRadioValue('rating'),
-      courier: getRadioValue('courier'),
-      speed: getRadioValue('speed'),
-      comments: form.comments.value,
+      fullname: document.getElementById('fullname').value,
+      courierName: document.getElementById('courier').value || 'Sahabat Kurir',
+      rating: document.querySelector('input[name="rating"]:checked').value,
+      attitude: document.querySelector('input[name="attitude"]:checked').value,
+      speed: document.querySelector('input[name="speed"]:checked').value,
+      comments: document.getElementById('comments').value,
       timestamp: Date.now(),
-      isPublished: false // Pertahankan properti ini untuk moderasi
+      isPublished: true // Set true agar langsung tampil di slider
     };
 
-    if (validateForm(data)) {
-      db.ref("testimoni").push(data)
-        .then(() => {
-          // Tampilkan modal terimakasih
-          thankYouModal.style.display = 'flex';
-          form.reset();
-          clearErrors();
-          
-          // Clear is-filled class on reset
-          inputs.forEach(input => {
-              input.closest('.form-group')?.classList.remove('is-filled');
-          });
-        })
-        .catch((error) => {
-          console.error("Error menyimpan data:", error);
-          alert("⚠️ Gagal menyimpan testimoni. Coba lagi ya.");
-        });
+    try {
+      await db.ref('testimoni').push(data);
+      document.getElementById('successModal').style.display = 'flex';
+    } catch (err) {
+      alert("Terjadi kesalahan, coba lagi.");
     }
   });
 
-  // Tutup modal terimakasih
-  closeModalBtn.addEventListener('click', () => {
-    thankYouModal.style.display = 'none';
-  });
-
-  // Modal sambutan awal
-  const welcomeModal = document.getElementById('welcomeModal');
-  const closeWelcomeBtn = document.getElementById('closeWelcomeBtn');
-  window.addEventListener('load', () => {
-      welcomeModal.style.display = 'flex';
-      welcomeModal.focus(); 
-  });
-  closeWelcomeBtn.addEventListener('click', () => {
-    welcomeModal.style.display = 'none';
-  });
-
-  // Bagian Testimoni
-  const testimonialsContainer = document.getElementById('testimonials-container');
-
-  // Fungsi untuk membuat elemen HTML testimoni
-  function createTestimonialCard(data) {
-    const card = document.createElement('div');
-    card.classList.add('testimonial-card');
+  // Load Slider (Ambil 10 data terakhir yang dipublish)
+  db.ref('testimoni').orderByChild('isPublished').equalTo(true).limitToLast(10).on('value', snap => {
+    const track = document.getElementById('testiTrack');
+    track.innerHTML = '';
+    if(!snap.exists()) return;
     
-    const ratingValue = parseInt(data.rating);
-    const fullStars = '<span class="rating-icon"></span>'.repeat(ratingValue);
-    const emptyStars = '<span class="rating-icon" style="color:var(--gray-light);"></span>'.repeat(5 - ratingValue);
-    const starsDisplay = fullStars + emptyStars;
+    const reviews = Object.values(snap.val()).reverse();
+    // Gandakan data untuk efek seamless infinite scroll
+    const looped = [...reviews, ...reviews, ...reviews]; 
 
-    // Format tanggal
-    const date = new Date(data.timestamp).toLocaleDateString('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-    
-    // Ambil nama depan dan inisial nama belakang
-    const nameParts = data.fullname.trim().split(' ').filter(n => n.length > 0);
-    let displayName = nameParts[0] || 'Anonim';
-    if (nameParts.length > 1) {
-        displayName += ' ' + nameParts[nameParts.length - 1][0] + '.';
-    }
-
-    // Isi konten card
-    card.innerHTML = `
-      <div class="testimonial-card-header">
-        <span class="name">${displayName}</span>
-        <div class="rating-display" aria-label="Rating: ${data.rating} dari 5 bintang">
-            ${starsDisplay}
+    looped.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'testi-item';
+      card.innerHTML = `
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+          <span style="font-weight:800; color:var(--primary);">${item.fullname}</span>
+          <span style="color:var(--gold);">${'★'.repeat(item.rating)}</span>
         </div>
-      </div>
-      <p>${data.comments}</p>
-      <div class="meta">
-        <span>Layanan: ${data.speed} | Kurir: ${data.courier}</span>
-        <span>${date}</span>
-      </div>
-    `;
-    return card;
-  }
-
-  // Ambil dan tampilkan data testimoni dari Firebase
-  function fetchTestimonials() {
-    // Filter data yang memiliki isPublished: true dan urutkan berdasarkan timestamp
-    const testimonialsRef = db.ref('testimoni').orderByChild('isPublished').equalTo(true);
-
-    testimonialsRef.on('value', (snapshot) => {
-      testimonialsContainer.innerHTML = '';
-
-      if (snapshot.exists()) {
-        const testimonialsData = snapshot.val();
-        
-        const testimonialsArray = Object.values(testimonialsData);
-
-        // Urutkan array berdasarkan timestamp dari terbaru ke terlama
-        testimonialsArray.sort((a, b) => b.timestamp - a.timestamp);
-
-        testimonialsArray.forEach(testimonial => {
-          const card = createTestimonialCard(testimonial);
-          testimonialsContainer.appendChild(card);
-        });
-      } else {
-        testimonialsContainer.innerHTML = '<p style="text-align:center; color:var(--gray-medium); padding: 20px;">Belum ada testimoni yang disetujui untuk ditampilkan.</p>';
-      }
-    }, (error) => {
-      console.error("Gagal mengambil data testimoni:", error);
-      testimonialsContainer.innerHTML = '<p style="text-align:center; color:var(--error); padding: 20px;">Gagal memuat testimoni.</p>';
+        <p style="font-size:0.9rem; color:var(--text); line-height:1.5; font-style:italic;">"${item.comments}"</p>
+        <div style="margin-top:15px; padding-top:10px; border-top:1px solid #f1f5f9; font-size:0.75rem; color:var(--text-soft);">
+          📦 ${item.speed} • 🛵 ${item.courierName}
+        </div>
+      `;
+      track.appendChild(card);
     });
-  }
-
-  // Panggil fungsi saat halaman dimuat
-  window.addEventListener('load', fetchTestimonials);
+  });
 </script>
+
 </body>
 </html>
