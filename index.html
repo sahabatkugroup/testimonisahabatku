@@ -225,52 +225,72 @@
   function closePop() { document.getElementById('welcomePop').style.display = 'none'; }
 
   // Simpan ke Firebase
+  // Simpan ke Firebase
   document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = {
-      fullname: document.getElementById('fullname').value,
-      courierName: document.getElementById('courier').value || 'Sahabat Kurir',
-      rating: document.querySelector('input[name="rating"]:checked').value,
-      attitude: document.querySelector('input[name="attitude"]:checked').value,
-      speed: document.querySelector('input[name="speed"]:checked').value,
-      comments: document.getElementById('comments').value,
-      timestamp: Date.now(),
-      isPublished: false // Set true agar langsung tampil di slider
-    };
-
-    try {
-      await db.ref('testimoni').push(data);
-      document.getElementById('successModal').style.display = 'flex';
-    } catch (err) {
-      alert("Terjadi kesalahan, coba lagi.");
-    }
+      e.preventDefault();
+      
+      // Ambil tombol submit untuk dinonaktifkan sementara
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+  
+      const data = {
+          fullname: document.getElementById('fullname').value,
+          courierName: document.getElementById('courier').value || 'Sahabat Kurir',
+          rating: document.querySelector('input[name="rating"]:checked').value,
+          attitude: document.querySelector('input[name="attitude"]:checked').value,
+          speed: document.querySelector('input[name="speed"]:checked').value,
+          comments: document.getElementById('comments').value,
+          timestamp: Date.now(),
+          isPublished: false 
+      };
+  
+      try {
+          await db.ref('testimoni').push(data);
+          document.getElementById('successModal').style.display = 'flex';
+          e.target.reset(); // Mengosongkan form setelah berhasil
+      } catch (err) {
+          console.error(err);
+          alert("Terjadi kesalahan, coba lagi.");
+      } finally {
+          // Hidupkan kembali tombol setelah proses selesai
+          if (submitBtn) submitBtn.disabled = false;
+      }
   });
 
   // Load Slider (Ambil 10 data terakhir yang dipublish)
   db.ref('testimoni').orderByChild('isPublished').equalTo(true).limitToLast(10).on('value', snap => {
-    const track = document.getElementById('testiTrack');
-    track.innerHTML = '';
-    if(!snap.exists()) return;
-    
-    const reviews = Object.values(snap.val()).reverse();
-    // Gandakan data untuk efek seamless infinite scroll
-    const looped = [...reviews, ...reviews, ...reviews]; 
-
-    looped.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'testi-item';
-      card.innerHTML = `
-        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-          <span style="font-weight:800; color:var(--primary);">${item.fullname}</span>
-          <span style="color:var(--gold);">${'★'.repeat(item.rating)}</span>
-        </div>
-        <p style="font-size:0.9rem; color:var(--text); line-height:1.5; font-style:italic;">"${item.comments}"</p>
-        <div style="margin-top:15px; padding-top:10px; border-top:1px solid #f1f5f9; font-size:0.75rem; color:var(--text-soft);">
-          📦 ${item.speed} • 🛵 ${item.courierName}
-        </div>
-      `;
-      track.appendChild(card);
-    });
+      const track = document.getElementById('testiTrack');
+      
+      // PENTING: Bersihkan kontainer agar tidak double saat ada update data
+      track.innerHTML = ''; 
+      
+      if(!snap.exists()) {
+          track.innerHTML = '<p style="text-align:center; width:100%;">Belum ada ulasan.</p>';
+          return;
+      }
+      
+      // Ambil data dan balik urutannya (terbaru di depan)
+      const dataObj = snap.val();
+      const reviews = Object.keys(dataObj).map(key => dataObj[key]).reverse();
+      
+      // Gandakan data untuk efek seamless infinite scroll
+      const looped = [...reviews, ...reviews, ...reviews]; 
+  
+      looped.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'testi-item';
+          card.innerHTML = `
+              <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                  <span style="font-weight:800; color:var(--primary);">${item.fullname}</span>
+                  <span style="color:var(--gold);">${'★'.repeat(item.rating)}</span>
+              </div>
+              <p style="font-size:0.9rem; color:var(--text); line-height:1.5; font-style:italic;">"${item.comments}"</p>
+              <div style="margin-top:15px; padding-top:10px; border-top:1px solid #f1f5f9; font-size:0.75rem; color:var(--text-soft);">
+                  📦 ${item.speed} • 🛵 ${item.courierName}
+              </div>
+          `;
+          track.appendChild(card);
+      });
   });
 </script>
 
